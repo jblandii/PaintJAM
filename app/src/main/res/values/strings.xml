@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Paint-JAM</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="mensaje_comenzar_nuevo_dibujo">¿Comenzar nuevo dibujo (perderás el dibujo actual)?</string>
+    <string name="nuevo_dibujo">Nuevo Dibujo</string>
+    <string name="guardar_dibujo">Guardar dibujo</string>
+    <string name="mensaje_guardar_dibujo">¿Guardar dibujo en la galeria?</string>
+    <string name="mensaje_guardado_exito">¡Dibujo guardado en la galeria con exito!</string>
+    <string name="mensaje_error_guardar">¡Error! La imagen no ha podido ser guardada.</string>
 </resources>

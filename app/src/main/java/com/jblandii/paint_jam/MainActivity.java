@@ -37,6 +37,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cargarElementos();
+
+        lienzo.setColor((String) colorEscogido.getTag());
+        tamanoElegido = 20;
+    }
+
+    private void cargarElementos() {
         trazo = findViewById(R.id.trazo);
         anyadir = findViewById(R.id.anadir);
         borrar = findViewById(R.id.borrar);
@@ -52,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         paletaColores.setOnClickListener(this);
 
         lienzo = findViewById(R.id.v_lienzo);
-        lienzo.setColor((String) colorEscogido.getTag());
-        tamanoElegido = 20;
     }
 
     @Override
@@ -67,15 +73,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
             case R.id.anadir:
                 AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-                newDialog.setTitle("Nuevo Dibujo");
-                newDialog.setMessage("¿Comenzar nuevo dibujo (perderás el dibujo actual)?");
-                newDialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                newDialog.setTitle(getResources().getString(R.string.nuevo_dibujo));
+                newDialog.setMessage(getResources().getString(R.string.mensaje_comenzar_nuevo_dibujo));
+                newDialog.setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         lienzo.NuevoDibujo();
                         dialog.dismiss();
                     }
                 });
-                newDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                newDialog.setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
@@ -88,9 +94,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.guardar:
 
                 AlertDialog.Builder salvarDibujo = new AlertDialog.Builder(this);
-                salvarDibujo.setTitle("Salvar dibujo");
-                salvarDibujo.setMessage("¿Salvar Dibujo a la galeria?");
-                salvarDibujo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+                salvarDibujo.setTitle(getResources().getString(R.string.guardar_dibujo));
+                salvarDibujo.setMessage(getResources().getString(R.string.mensaje_guardar_dibujo));
+                salvarDibujo.setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener()
 
                 {
                     public void onClick(DialogInterface dialog, int which) {
@@ -106,18 +112,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         Mensaje de todo correcto
                          */
                         if (imgSaved != null) {
-                            Toast savedToast = Toast.makeText(getApplicationContext(),
-                                    "¡Dibujo guardado en la galeria con exito!", Toast.LENGTH_SHORT);
+                            Toast savedToast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.mensaje_guardado_exito), Toast.LENGTH_SHORT);
                             savedToast.show();
                         } else {
-                            Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                                    "¡Error! La imagen no ha podido ser guardada.", Toast.LENGTH_SHORT);
+                            Toast unsavedToast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.mensaje_error_guardar), Toast.LENGTH_SHORT);
                             unsavedToast.show();
                         }
                         lienzo.destroyDrawingCache();
                     }
                 });
-                salvarDibujo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+                salvarDibujo.setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener()
 
                 {
                     public void onClick(DialogInterface dialog, int which) {
@@ -157,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     /**
      * Cuadro de dialogo que usaré tanto para borrar como para pintar en el que tendre que elegir el tamaño del pincel.
+     *
      * @param eleccion para saber si se va a borrar o pintar.
      */
     public void dialogoTamanyo(String eleccion) {
